@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.sta.domain.Trabalho;
-import br.com.sta.dto.TrabalhoDTO;
+import br.com.sta.domain.Evento;
+import br.com.sta.dto.EventoDTO;
 import br.com.sta.exception.BadResourceException;
 import br.com.sta.exception.ResourceAlreadyExistsException;
 import br.com.sta.exception.ResourceNotFoundException;
-import br.com.sta.service.TrabalhoService;
+import br.com.sta.service.EventoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,41 +40,41 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @RestController
 @RequestMapping("/api")
-@Tag(name = "trabalho", description = "API de Trabalho")
-public class TrabalhoController {
+@Tag(name = "evento", description = "API de Evento")
+public class EventoController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	// private final int ROW_PER_PAGE = 5;
 	
 	@Autowired
-	private TrabalhoService trabalhoService;
+	private EventoService eventoService;
 	
-	@Operation(summary = "Busca trabalhos", description = "Buscar todos os trabalhos, buscar trabalhos por título", tags = {"trabalho"})
-	@GetMapping(value = "/trabalho")
+	@Operation(summary = "Busca eventos", description = "Buscar todos os eventos, buscar eventos por nome", tags = {"evento"})
+	@GetMapping(value = "/evento")
 	@CrossOrigin("http://localhost:3000")
-	public ResponseEntity<Page<TrabalhoDTO>> findAll(
-			@Parameter(description = "Descrição para pesquisa", allowEmptyValue = true)
-			@RequestBody(required=false) String titulo,
+	public ResponseEntity<Page<EventoDTO>> findAll(
+			@Parameter(description = "Nome para pesquisa", allowEmptyValue = true)
+			@RequestBody(required=false) String nome,
 			@Parameter(description = "Paginação", example = "{\"page\":0,\"size\":1}", allowEmptyValue = true)
 			 Pageable pageable)	{
-		if(titulo.isEmpty()) {
-			return ResponseEntity.ok(trabalhoService.findAll(pageable));
+		if(nome.isEmpty()) {
+			return ResponseEntity.ok(eventoService.findAll(pageable));
 		} else {
-			return ResponseEntity.ok(trabalhoService.findAllByTitulo(titulo, pageable));
+			return ResponseEntity.ok(eventoService.findAllByNome(nome, pageable));
 		}
 	}
 	
-	@Operation(summary = "Busca ID", description = "Buscar trabalho por ID", tags = {"trabalho"})
+	@Operation(summary = "Busca ID", description = "Buscar evento por ID", tags = {"evento"})
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Sucesso",
-					content = @Content(schema = @Schema(implementation = Trabalho.class))),
-			@ApiResponse(responseCode = "404", description = "Trabalho não encontrado")
+					content = @Content(schema = @Schema(implementation = Evento.class))),
+			@ApiResponse(responseCode = "404", description = "Evento não encontrado")
 	})
-	@GetMapping(value = "/trabalho/{id}")
+	@GetMapping(value = "/evento/{id}")
 	@CrossOrigin("http://localhost:3000")
-	public ResponseEntity<Trabalho> findTrabalhoById(@PathVariable long id) {
+	public ResponseEntity<Evento> findEventoById(@PathVariable long id) {
 		try {
-			Trabalho trabalho = trabalhoService.findById(id);
-			return ResponseEntity.ok(trabalho);
+			Evento evento = eventoService.findById(id);
+			return ResponseEntity.ok(evento);
 		} catch (ResourceNotFoundException ex) {
 			logger.error(ex.getMessage());
 			
@@ -82,15 +82,29 @@ public class TrabalhoController {
 		}
 	
 	}
-	
-	@Operation(summary = "Adicionar trabalho", description = "Adicionar novo trabalho informado no banco de dados", tags = {"trabalho"})
-	@PostMapping(value = "/trabalho")
+
+	@Operation(summary = "Busca ID", description = "Buscar evento por ID do organizador", tags = {
+		"evento" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Sucesso", content = @Content(schema = @Schema(implementation = Evento.class))),
+			@ApiResponse(responseCode = "404", description = "Evento não encontrado para este autor")
+	})
+	@GetMapping(value = "/evento/organizador/{id}")
 	@CrossOrigin("http://localhost:3000")
-	public ResponseEntity<TrabalhoDTO> addTrabalho(@RequestBody Trabalho trabalho) throws URISyntaxException {
+	public ResponseEntity<Page<EventoDTO>> findEventoByIdOrganizador(@PathVariable long id,
+			@Parameter(description = "Paginação", example = "{\"page\":0,\"size\":1}", allowEmptyValue = true) Pageable pageable) {
+		Page<EventoDTO> eventos = eventoService.findAllByIdOrganizador(id, pageable);
+		return ResponseEntity.ok(eventos);
+	}
+	
+	@Operation(summary = "Adicionar evento", description = "Adicionar novo evento informado no banco de dados", tags = {"evento"})
+	@PostMapping(value = "/evento")
+	@CrossOrigin("http://localhost:3000")
+	public ResponseEntity<EventoDTO> addEvento(@RequestBody Evento evento) throws URISyntaxException {
 		try {
-			Trabalho novoTrabalho = trabalhoService.save(trabalho);
+			Evento novoEvento = eventoService.save(evento);
 			
-			return ResponseEntity.created(new URI("/api/trabalho" + novoTrabalho.getId())).body(new TrabalhoDTO().converter(trabalho));
+			return ResponseEntity.created(new URI("/api/evento" + novoEvento.getId())).body(new EventoDTO().converter(evento));
 		} catch (ResourceAlreadyExistsException ex) {
 			logger.error(ex.getMessage());
 			return ResponseEntity.status(HttpStatus.CONFLICT).build();
@@ -100,14 +114,14 @@ public class TrabalhoController {
 		}
 	}
 	
-	@Operation(summary = "Alterar Trabalho", description = "Alterar valores do trabalho com id selecionado", tags = {"trabalho"})
-	@PutMapping(value = "/trabalho/{id}")
+	@Operation(summary = "Alterar Evento", description = "Alterar valores do evento com id selecionado", tags = {"evento"})
+	@PutMapping(value = "/evento/{id}")
 	@CrossOrigin("http://localhost:3000")
-	public ResponseEntity<Trabalho> updateTrabalho(@Valid @RequestBody Trabalho trabalho, 
+	public ResponseEntity<Evento> updateEvento(@Valid @RequestBody Evento evento, 
 			@PathVariable long id) {
 		try {
-			trabalho.setId(id);
-			trabalhoService.update(trabalho);
+			evento.setId(id);
+			eventoService.update(evento);
 			return ResponseEntity.ok().build();
 		} catch (ResourceNotFoundException ex) {
 			logger.error(ex.getMessage());
@@ -119,12 +133,12 @@ public class TrabalhoController {
 		
 	}
 	
-	@Operation(summary = "Deletar trabalho", description = "Deletar trabalho com o ID informado", tags = {"trabalho"})
-	@DeleteMapping(path = "/trabalho/{id}")
+	@Operation(summary = "Deletar evento", description = "Deletar evento com o ID informado", tags = {"evento"})
+	@DeleteMapping(path = "/evento/{id}")
 	@CrossOrigin("http://localhost:3000")
-	public ResponseEntity<Void> deleteTrabalhoById(@PathVariable long id) {
+	public ResponseEntity<Void> deleteEventoById(@PathVariable long id) {
 		try {
-			trabalhoService.deleteById(id);
+			eventoService.deleteById(id);
 			return ResponseEntity.ok().build();
 		} catch (ResourceNotFoundException ex) {
 			logger.error(ex.getMessage());
