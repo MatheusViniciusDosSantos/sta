@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +54,7 @@ public class UsuarioService {
 				throw new ResourceAlreadyExistsException("Usuario com id: " + usuario.getId() + " já existe.");
 			}			
 			usuario.setStatus('A');
-			usuario.setDataCadastro(Instant.now());
+			usuario.setDataCadastro(Calendar.getInstance().getTime());
 			Usuario usuarioNovo = usuarioRepository.save(usuario);			
 			return usuarioNovo;
 		} else {
@@ -71,7 +71,7 @@ public class UsuarioService {
 			if (!existsById(usuario.getId())) {
 				throw new ResourceNotFoundException("Usuario não encontrado com o id: " + usuario.getId());
 			}
-			usuario.setDataUltimaAlteracao(Instant.now());
+			usuario.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar usuario");
 			exe.addErrorMessage("Usuario esta vazio ou nulo");

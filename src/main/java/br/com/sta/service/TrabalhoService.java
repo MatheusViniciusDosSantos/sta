@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,7 +52,7 @@ public class TrabalhoService {
 				throw new ResourceAlreadyExistsException("Trabalho com id: " + trabalho.getId() + " já existe.");
 			}			
 			trabalho.setStatus('A');
-			trabalho.setDataCadastro(Instant.now());
+			trabalho.setDataCadastro(Calendar.getInstance().getTime());
 			Trabalho trabalhoNovo = trabalhoRepository.save(trabalho);			
 			return trabalhoNovo;
 		} else {
@@ -69,7 +69,7 @@ public class TrabalhoService {
 			if (!existsById(trabalho.getId())) {
 				throw new ResourceNotFoundException("Trabalho não encontrado com o id: " + trabalho.getId());
 			}
-			trabalho.setDataUltimaAlteracao(Instant.now());
+			trabalho.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar trabalho");
 			exe.addErrorMessage("Trabalho esta vazio ou nulo");

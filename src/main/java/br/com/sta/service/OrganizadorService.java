@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +54,7 @@ public class OrganizadorService {
 				throw new ResourceAlreadyExistsException("Organizador com id: " + organizador.getId() + " já existe.");
 			}			
 			organizador.setStatus('A');
-			organizador.setDataCadastro(Instant.now());
+			organizador.setDataCadastro(Calendar.getInstance().getTime());
 			return organizadorRepository.save(organizador);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar organizador");
@@ -70,7 +70,7 @@ public class OrganizadorService {
 			if (!existsById(organizador.getId())) {
 				throw new ResourceNotFoundException("Organizador não encontrado com o id: " + organizador.getId());
 			}
-			organizador.setDataUltimaAlteracao(Instant.now());
+			organizador.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar organizador");
 			exe.addErrorMessage("Organizador esta vazio ou nulo");

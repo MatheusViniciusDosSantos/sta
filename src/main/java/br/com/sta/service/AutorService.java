@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,7 +52,7 @@ public class AutorService {
 				throw new ResourceAlreadyExistsException("Autor com id: " + autor.getId() + " já existe.");
 			}			
 			autor.setStatus('A');
-			autor.setDataCadastro(Instant.now());
+			autor.setDataCadastro(Calendar.getInstance().getTime());
 			return autorRepository.save(autor);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar autor");
@@ -68,7 +68,7 @@ public class AutorService {
 			if (!existsById(autor.getId())) {
 				throw new ResourceNotFoundException("Autor não encontrado com o id: " + autor.getId());
 			}
-			autor.setDataUltimaAlteracao(Instant.now());
+			autor.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar autor");
 			exe.addErrorMessage("Autor esta vazio ou nulo");

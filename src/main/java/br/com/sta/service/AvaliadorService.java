@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +54,7 @@ public class AvaliadorService {
 				throw new ResourceAlreadyExistsException("Avaliador com id: " + avaliador.getId() + " já existe.");
 			}			
 			avaliador.setStatus('A');
-			avaliador.setDataCadastro(Instant.now());
+			avaliador.setDataCadastro(Calendar.getInstance().getTime());
 			return avaliadorRepository.save(avaliador);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar avaliador");
@@ -70,7 +70,7 @@ public class AvaliadorService {
 			if (!existsById(avaliador.getId())) {
 				throw new ResourceNotFoundException("Avaliador não encontrado com o id: " + avaliador.getId());
 			}
-			avaliador.setDataUltimaAlteracao(Instant.now());
+			avaliador.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar avaliador");
 			exe.addErrorMessage("Avaliador esta vazio ou nulo");

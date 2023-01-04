@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,7 +52,7 @@ public class CriterioService {
 				throw new ResourceAlreadyExistsException("Criterio com id: " + criterio.getId() + " já existe.");
 			}			
 			criterio.setStatus('A');
-			criterio.setDataCadastro(Instant.now());
+			criterio.setDataCadastro(Calendar.getInstance().getTime());
 			Criterio criterioNovo = criterioRepository.save(criterio);			
 			return criterioNovo;
 		} else {
@@ -69,7 +69,7 @@ public class CriterioService {
 			if (!existsById(criterio.getId())) {
 				throw new ResourceNotFoundException("Criterio não encontrado com o id: " + criterio.getId());
 			}
-			criterio.setDataUltimaAlteracao(Instant.now());
+			criterio.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar criterio");
 			exe.addErrorMessage("Criterio esta vazio ou nulo");

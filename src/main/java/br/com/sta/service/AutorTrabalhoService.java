@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,13 +39,13 @@ public class AutorTrabalhoService {
 		return new AutorTrabalhoDTO().converterListaAutorTrabalhoDTO(autorTrabalhoRepository.findAll(pageable)) ;
 	}
 	
-	public Page<AutorTrabalhoDTO> findAllByIdAutor(Long id) {
-		Page<AutorTrabalho> autorTrabalhos = autorTrabalhoRepository.findByAutor(id);
+	public Page<AutorTrabalhoDTO> findAllByIdAutor(Long id, Pageable page) {
+		Page<AutorTrabalho> autorTrabalhos = autorTrabalhoRepository.findByAutor(id, page);
 		return new AutorTrabalhoDTO().converterListaAutorTrabalhoDTO(autorTrabalhos);
 	}
 
-	public Page<AutorTrabalhoDTO> findAllByIdTrabalho(Long id) {
-		Page<AutorTrabalho> autorTrabalhos = autorTrabalhoRepository.findByTrabalho(id);
+	public Page<AutorTrabalhoDTO> findAllByIdTrabalho(Long id, Pageable page) {
+		Page<AutorTrabalho> autorTrabalhos = autorTrabalhoRepository.findByTrabalho(id, page);
 		return new AutorTrabalhoDTO().converterListaAutorTrabalhoDTO(autorTrabalhos);
 	}
 	
@@ -55,7 +55,7 @@ public class AutorTrabalhoService {
 				throw new ResourceAlreadyExistsException("AutorTrabalho com id: " + autorTrabalho.getId() + " já existe.");
 			}			
 			autorTrabalho.setStatus('A');
-			autorTrabalho.setDataCadastro(Instant.now());
+			autorTrabalho.setDataCadastro(Calendar.getInstance().getTime());
 			AutorTrabalho autorTrabalhoNovo = autorTrabalhoRepository.save(autorTrabalho);			
 			return autorTrabalhoNovo;
 		} else {
@@ -70,7 +70,7 @@ public class AutorTrabalhoService {
 			if (!existsById(autorTrabalho.getId())) {
 				throw new ResourceNotFoundException("AutorTrabalho não encontrado com o id: " + autorTrabalho.getId());
 			}
-			autorTrabalho.setDataUltimaAlteracao(Instant.now());
+			autorTrabalho.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar autorTrabalho");
 			exe.addErrorMessage("AutorTrabalho esta vazio ou nulo");

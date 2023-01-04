@@ -1,6 +1,6 @@
 package br.com.sta.domain;
 
-import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -31,7 +31,7 @@ public abstract class Auditoria {
     @Temporal(TemporalType.TIMESTAMP)
     @Schema(description = "Data de cadstro")
     @Column(name = "data_cadastro", updatable = false)
-    private Instant dataCadastro;
+    private Date dataCadastro;
 
     @LastModifiedBy
     @Schema(description = "Usuario que realizou a ultima alteração")
@@ -42,7 +42,7 @@ public abstract class Auditoria {
     @Temporal(TemporalType.TIMESTAMP)
     @Schema(description = "Data da ultima alteração")
     @Column(name = "data_ultima_alteracao")
-    private Instant dataUltimaAlteracao;
+    private Date dataUltimaAlteracao;
 
     @Value("A")
     @Schema(description = "Status do usuário", example = "A")

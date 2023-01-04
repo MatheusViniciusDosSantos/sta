@@ -1,7 +1,5 @@
 package br.com.sta.repository;
 
-import java.util.Date;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,8 +18,5 @@ public interface OrganizadorRepository extends JpaRepository<Organizador, Long> 
 	Organizador findByEmail(String email);
 	
 	Organizador findByEmailAndCodigoRecuperacaoSenha(String email, String codigoRecuperacaoSenha);
-
-	@Query(value = "select p from Organizador p where p.dataOrganizacao=?1")
-	Organizador findByDataOrganizacao(Date data);
 }
 

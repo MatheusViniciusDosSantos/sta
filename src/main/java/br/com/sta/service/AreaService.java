@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,7 +52,7 @@ public class AreaService {
 				throw new ResourceAlreadyExistsException("Area com id: " + area.getId() + " já existe.");
 			}			
 			area.setStatus('A');
-			area.setDataCadastro(Instant.now());
+			area.setDataCadastro(Calendar.getInstance().getTime());
 			Area areaNovo = areaRepository.save(area);			
 			return areaNovo;
 		} else {
@@ -69,7 +69,7 @@ public class AreaService {
 			if (!existsById(area.getId())) {
 				throw new ResourceNotFoundException("Area não encontrada com o id: " + area.getId());
 			}
-			area.setDataUltimaAlteracao(Instant.now());
+			area.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar area");
 			exe.addErrorMessage("Area esta vazia ou nula");

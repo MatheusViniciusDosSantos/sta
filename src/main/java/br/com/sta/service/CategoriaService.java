@@ -1,6 +1,6 @@
 package br.com.sta.service;
 
-import java.time.Instant;
+import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -52,7 +52,7 @@ public class CategoriaService {
 				throw new ResourceAlreadyExistsException("Categoria com id: " + categoria.getId() + " já existe.");
 			}			
 			categoria.setStatus('A');
-			categoria.setDataCadastro(Instant.now());
+			categoria.setDataCadastro(Calendar.getInstance().getTime());
 			Categoria categoriaNovo = categoriaRepository.save(categoria);			
 			return categoriaNovo;
 		} else {
@@ -69,7 +69,7 @@ public class CategoriaService {
 			if (!existsById(categoria.getId())) {
 				throw new ResourceNotFoundException("Categoria não encontrada com o id: " + categoria.getId());
 			}
-			categoria.setDataUltimaAlteracao(Instant.now());
+			categoria.setDataUltimaAlteracao(Calendar.getInstance().getTime());
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar categoria");
 			exe.addErrorMessage("Categoria esta vazia ou nula");
