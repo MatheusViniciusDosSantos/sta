@@ -45,6 +45,11 @@ public class TrabalhoService {
 		
 		return new TrabalhoDTO().converterListaTrabalhoDTO(trabalhos);
 	}
+
+	public Page<TrabalhoDTO> findAllByIdCategoria(Long id, Pageable page) {
+		Page<Trabalho> trabalhos = trabalhoRepository.findByCategoria(id, page);
+		return new TrabalhoDTO().converterListaTrabalhoDTO(trabalhos);
+	}
 	
 	public Trabalho save(Trabalho trabalho) throws BadResourceException, ResourceAlreadyExistsException {
 		if(!trabalho.getTitulo().isEmpty()) {

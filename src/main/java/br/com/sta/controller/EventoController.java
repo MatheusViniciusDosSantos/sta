@@ -87,7 +87,7 @@ public class EventoController {
 		"evento" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Sucesso", content = @Content(schema = @Schema(implementation = Evento.class))),
-			@ApiResponse(responseCode = "404", description = "Evento não encontrado para este autor")
+			@ApiResponse(responseCode = "404", description = "Evento não encontrado com este organizador")
 	})
 	@GetMapping(value = "/evento/organizador/{id}")
 	@CrossOrigin("http://localhost:3000")

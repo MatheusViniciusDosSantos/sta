@@ -82,6 +82,20 @@ public class TrabalhoController {
 		}
 	
 	}
+
+	@Operation(summary = "Busca ID", description = "Buscar trabalho por ID da categoria", tags = {
+		"trabalho" })
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Sucesso", content = @Content(schema = @Schema(implementation = Trabalho.class))),
+			@ApiResponse(responseCode = "404", description = "Trabalho não encontrado com esta categoria")
+	})
+	@GetMapping(value = "/trabalho/categoria/{id}")
+	@CrossOrigin("http://localhost:3000")
+	public ResponseEntity<Page<TrabalhoDTO>> findTrabalhoByIdCategoria(@PathVariable long id,
+			@Parameter(description = "Paginação", example = "{\"page\":0,\"size\":1}", allowEmptyValue = true) Pageable pageable) {
+		Page<TrabalhoDTO> trabalhos = trabalhoService.findAllByIdCategoria(id, pageable);
+		return ResponseEntity.ok(trabalhos);
+	}
 	
 	@Operation(summary = "Adicionar trabalho", description = "Adicionar novo trabalho informado no banco de dados", tags = {"trabalho"})
 	@PostMapping(value = "/trabalho")
