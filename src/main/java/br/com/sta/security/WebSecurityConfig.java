@@ -1,5 +1,5 @@
 package br.com.sta.security;
-// package br.com.superloja.security;
+// package br.com.sta.security;
 
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.context.annotation.Bean;

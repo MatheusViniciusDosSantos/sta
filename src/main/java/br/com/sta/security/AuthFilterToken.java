@@ -1,5 +1,5 @@
 package br.com.sta.security;
-// package br.com.superloja.security;
+// package br.com.sta.security;
 
 // import java.io.IOException;
 
@@ -16,7 +16,7 @@ package br.com.sta.security;
 // import org.springframework.util.StringUtils;
 // import org.springframework.web.filter.OncePerRequestFilter;
 
-// import br.com.superloja.service.UsuarioDatailService;
+// import br.com.sta.service.UsuarioDatailService;
 
 // public class AuthFilterToken extends OncePerRequestFilter{
 

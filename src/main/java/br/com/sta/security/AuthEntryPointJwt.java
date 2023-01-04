@@ -1,5 +1,5 @@
 package br.com.sta.security;
-// package br.com.superloja.security;
+// package br.com.sta.security;
 
 // import java.io.IOException;
 // import java.util.HashMap;

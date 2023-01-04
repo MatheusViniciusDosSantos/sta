@@ -12,7 +12,7 @@
 	<artifactId>sta</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sta</name>
-	<description>Implementação de uma super loja</description>
+	<description>Implementação de um sitema para gestão de trabahos acadêmicos</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

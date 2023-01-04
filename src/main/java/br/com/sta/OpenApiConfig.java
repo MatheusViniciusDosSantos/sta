@@ -13,7 +13,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .components(new Components())
-                .info(new Info().title("API de loja online de produtos").description(
-                        "Esta API fornece informações sobre a SuperLoja loja online de produtos"));
+                .info(new Info().title("API de um Sistema de trabalhos acadêmicos").description(
+                        "Esta API vai ser usada como back do Sistema de trabalhos acadêmicos"));
     }
 }

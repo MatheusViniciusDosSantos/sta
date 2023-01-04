@@ -1,5 +1,5 @@
 package br.com.sta.security;
-// package br.com.superloja.security;
+// package br.com.sta.security;
 
 // import java.util.Date;
 
@@ -9,7 +9,7 @@ package br.com.sta.security;
 // import org.slf4j.LoggerFactory;
 // import org.springframework.stereotype.Component;
 
-// import br.com.superloja.domain.Usuario;
+// import br.com.sta.domain.Usuario;
 // import io.jsonwebtoken.ExpiredJwtException;
 // import io.jsonwebtoken.Jwts;
 // import io.jsonwebtoken.SignatureAlgorithm;
