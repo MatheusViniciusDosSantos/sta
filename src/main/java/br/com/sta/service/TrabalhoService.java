@@ -58,7 +58,7 @@ public class TrabalhoService {
 			}			
 			trabalho.setStatus('A');
 			trabalho.setDataCadastro(Calendar.getInstance().getTime());
-			Trabalho trabalhoNovo = trabalhoRepository.save(trabalho);			
+			Trabalho trabalhoNovo = trabalhoRepository.save(trabalho);
 			return trabalhoNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar trabalho");
@@ -75,6 +75,7 @@ public class TrabalhoService {
 				throw new ResourceNotFoundException("Trabalho não encontrado com o id: " + trabalho.getId());
 			}
 			trabalho.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			trabalhoRepository.save(trabalho);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar trabalho");
 			exe.addErrorMessage("Trabalho esta vazio ou nulo");

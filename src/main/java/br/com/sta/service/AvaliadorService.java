@@ -71,6 +71,7 @@ public class AvaliadorService {
 				throw new ResourceNotFoundException("Avaliador não encontrado com o id: " + avaliador.getId());
 			}
 			avaliador.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			avaliadorRepository.save(avaliador);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar avaliador");
 			exe.addErrorMessage("Avaliador esta vazio ou nulo");

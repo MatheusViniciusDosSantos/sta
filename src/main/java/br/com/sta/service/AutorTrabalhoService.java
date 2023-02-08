@@ -56,7 +56,7 @@ public class AutorTrabalhoService {
 			}			
 			autorTrabalho.setStatus('A');
 			autorTrabalho.setDataCadastro(Calendar.getInstance().getTime());
-			AutorTrabalho autorTrabalhoNovo = autorTrabalhoRepository.save(autorTrabalho);			
+			AutorTrabalho autorTrabalhoNovo = autorTrabalhoRepository.save(autorTrabalho);
 			return autorTrabalhoNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar autorTrabalho");
@@ -71,6 +71,7 @@ public class AutorTrabalhoService {
 				throw new ResourceNotFoundException("AutorTrabalho não encontrado com o id: " + autorTrabalho.getId());
 			}
 			autorTrabalho.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			autorTrabalhoRepository.save(autorTrabalho);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar autorTrabalho");
 			exe.addErrorMessage("AutorTrabalho esta vazio ou nulo");

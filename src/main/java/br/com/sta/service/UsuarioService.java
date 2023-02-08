@@ -55,7 +55,7 @@ public class UsuarioService {
 			}			
 			usuario.setStatus('A');
 			usuario.setDataCadastro(Calendar.getInstance().getTime());
-			Usuario usuarioNovo = usuarioRepository.save(usuario);			
+			Usuario usuarioNovo = usuarioRepository.save(usuario);
 			return usuarioNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar usuario");
@@ -72,6 +72,7 @@ public class UsuarioService {
 				throw new ResourceNotFoundException("Usuario não encontrado com o id: " + usuario.getId());
 			}
 			usuario.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			usuarioRepository.save(usuario);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar usuario");
 			exe.addErrorMessage("Usuario esta vazio ou nulo");

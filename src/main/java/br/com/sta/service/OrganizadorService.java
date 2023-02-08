@@ -71,6 +71,7 @@ public class OrganizadorService {
 				throw new ResourceNotFoundException("Organizador não encontrado com o id: " + organizador.getId());
 			}
 			organizador.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			organizadorRepository.save(organizador);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar organizador");
 			exe.addErrorMessage("Organizador esta vazio ou nulo");

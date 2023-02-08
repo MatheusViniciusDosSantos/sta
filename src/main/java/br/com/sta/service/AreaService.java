@@ -53,7 +53,7 @@ public class AreaService {
 			}			
 			area.setStatus('A');
 			area.setDataCadastro(Calendar.getInstance().getTime());
-			Area areaNovo = areaRepository.save(area);			
+			Area areaNovo = areaRepository.save(area);
 			return areaNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar area");
@@ -70,6 +70,7 @@ public class AreaService {
 				throw new ResourceNotFoundException("Area não encontrada com o id: " + area.getId());
 			}
 			area.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			areaRepository.save(area);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar area");
 			exe.addErrorMessage("Area esta vazia ou nula");

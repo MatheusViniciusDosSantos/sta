@@ -58,7 +58,7 @@ public class EventoService {
 			}			
 			evento.setStatus('A');
 			evento.setDataCadastro(Calendar.getInstance().getTime());
-			Evento eventoNovo = eventoRepository.save(evento);			
+			Evento eventoNovo = eventoRepository.save(evento);
 			return eventoNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar evento");
@@ -73,6 +73,7 @@ public class EventoService {
 				throw new ResourceNotFoundException("Evento não encontrado com o id: " + evento.getId());
 			}
 			evento.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			eventoRepository.save(evento);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar evento");
 			exe.addErrorMessage("Evento esta vazio ou nulo");

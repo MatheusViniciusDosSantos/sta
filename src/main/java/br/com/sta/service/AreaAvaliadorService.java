@@ -71,6 +71,7 @@ public class AreaAvaliadorService {
 				throw new ResourceNotFoundException("AreaAvaliador não encontrado com o id: " + areaAvaliador.getId());
 			}
 			areaAvaliador.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			areaAvaliadorRepository.save(areaAvaliador);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar areaAvaliador");
 			exe.addErrorMessage("AreaAvaliador esta vazio ou nulo");

@@ -69,6 +69,7 @@ public class AutorService {
 				throw new ResourceNotFoundException("Autor não encontrado com o id: " + autor.getId());
 			}
 			autor.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			autorRepository.save(autor);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar autor");
 			exe.addErrorMessage("Autor esta vazio ou nulo");

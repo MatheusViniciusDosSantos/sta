@@ -56,7 +56,7 @@ public class AreaTrabalhoService {
 			}			
 			areaTrabalho.setStatus('A');
 			areaTrabalho.setDataCadastro(Calendar.getInstance().getTime());
-			AreaTrabalho areaTrabalhoNovo = areaTrabalhoRepository.save(areaTrabalho);			
+			AreaTrabalho areaTrabalhoNovo = areaTrabalhoRepository.save(areaTrabalho);
 			return areaTrabalhoNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar areaTrabalho");
@@ -71,6 +71,7 @@ public class AreaTrabalhoService {
 				throw new ResourceNotFoundException("AreaTrabalho não encontrado com o id: " + areaTrabalho.getId());
 			}
 			areaTrabalho.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			areaTrabalhoRepository.save(areaTrabalho);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar areaTrabalho");
 			exe.addErrorMessage("AreaTrabalho esta vazio ou nulo");

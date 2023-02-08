@@ -53,7 +53,7 @@ public class CategoriaService {
 			}			
 			categoria.setStatus('A');
 			categoria.setDataCadastro(Calendar.getInstance().getTime());
-			Categoria categoriaNovo = categoriaRepository.save(categoria);			
+			Categoria categoriaNovo = categoriaRepository.save(categoria);
 			return categoriaNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar categoria");
@@ -70,6 +70,7 @@ public class CategoriaService {
 				throw new ResourceNotFoundException("Categoria não encontrada com o id: " + categoria.getId());
 			}
 			categoria.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			categoriaRepository.save(categoria);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar categoria");
 			exe.addErrorMessage("Categoria esta vazia ou nula");

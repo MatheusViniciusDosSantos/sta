@@ -51,7 +51,7 @@ public class SubmissaoService {
 			}			
 			submissao.setStatus('A');
 			submissao.setDataCadastro(Calendar.getInstance().getTime());
-			Submissao submissaoNovo = submissaoRepository.save(submissao);			
+			Submissao submissaoNovo = submissaoRepository.save(submissao);
 			return submissaoNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar submissao");
@@ -68,6 +68,7 @@ public class SubmissaoService {
 				throw new ResourceNotFoundException("Submissao não encontrada com o id: " + submissao.getId());
 			}
 			submissao.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			submissaoRepository.save(submissao);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar submissao");
 			exe.addErrorMessage("Submissao esta vazia ou nula");

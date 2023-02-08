@@ -53,7 +53,7 @@ public class CriterioService {
 			}			
 			criterio.setStatus('A');
 			criterio.setDataCadastro(Calendar.getInstance().getTime());
-			Criterio criterioNovo = criterioRepository.save(criterio);			
+			Criterio criterioNovo = criterioRepository.save(criterio);
 			return criterioNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar criterio");
@@ -70,6 +70,7 @@ public class CriterioService {
 				throw new ResourceNotFoundException("Criterio não encontrado com o id: " + criterio.getId());
 			}
 			criterio.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			criterioRepository.save(criterio);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar criterio");
 			exe.addErrorMessage("Criterio esta vazio ou nulo");

@@ -56,7 +56,7 @@ public class SubmissaoCriterioService {
 			}			
 			submissaoCriterio.setStatus('A');
 			submissaoCriterio.setDataCadastro(Calendar.getInstance().getTime());
-			SubmissaoCriterio submissaoCriterioNovo = submissaoCriterioRepository.save(submissaoCriterio);			
+			SubmissaoCriterio submissaoCriterioNovo = submissaoCriterioRepository.save(submissaoCriterio);
 			return submissaoCriterioNovo;
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar submissaoCriterio");
@@ -71,6 +71,7 @@ public class SubmissaoCriterioService {
 				throw new ResourceNotFoundException("SubmissaoCriterio não encontrado com o id: " + submissaoCriterio.getId());
 			}
 			submissaoCriterio.setDataUltimaAlteracao(Calendar.getInstance().getTime());
+			submissaoCriterioRepository.save(submissaoCriterio);
 		} else {
 			BadResourceException exe = new BadResourceException("Erro ao salvar submissaoCriterio");
 			exe.addErrorMessage("SubmissaoCriterio esta vazio ou nulo");
