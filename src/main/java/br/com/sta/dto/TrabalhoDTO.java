@@ -11,11 +11,14 @@ public class TrabalhoDTO {
 	private long id;
 	private String titulo;
 	private CategoriaDTO categoriaDTO;
+	private EventoDTO eventoDTO;
+	private String resultado;
 	
 	public TrabalhoDTO converter(Trabalho trabalho) {
 		TrabalhoDTO trabalhoDTO = new TrabalhoDTO();
 		BeanUtils.copyProperties(trabalho, trabalhoDTO);
 		trabalhoDTO.setCategoriaDTO(categoriaDTO.converter(trabalho.getCategoria()));
+		trabalhoDTO.setEventoDTO(eventoDTO.converter(trabalho.getEvento()));
 		return trabalhoDTO;
 	}
 	

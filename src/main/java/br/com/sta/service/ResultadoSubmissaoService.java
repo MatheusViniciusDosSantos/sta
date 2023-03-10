@@ -39,18 +39,18 @@ public class ResultadoSubmissaoService {
 		return new ResultadoSubmissaoDTO().converterListaResultadoSubmissaoDTO(resultadoSubmissaoRepository.findAll(pageable)) ;
 	}
 	
-	public Page<ResultadoSubmissaoDTO> findAllByIdCriterio(Long id, Pageable page) {
-		Page<ResultadoSubmissao> resultadoSubmissoes = resultadoSubmissaoRepository.findByCriterio(id, page);
+	public Page<ResultadoSubmissaoDTO> findAllByResultado(int resultado, Pageable page) {
+		Page<ResultadoSubmissao> resultadoSubmissoes = resultadoSubmissaoRepository.findByResultado(resultado, page);
 		return new ResultadoSubmissaoDTO().converterListaResultadoSubmissaoDTO(resultadoSubmissoes);
 	}
 
-	public Page<ResultadoSubmissaoDTO> findAllByIdAvaliadorSubmissao(Long id, Pageable page) {
-		Page<ResultadoSubmissao> resultadoSubmissoes = resultadoSubmissaoRepository.findByAvaliadorSubmissao(id, page);
+	public Page<ResultadoSubmissaoDTO> findAllByConfianca(int confianca, Pageable page) {
+		Page<ResultadoSubmissao> resultadoSubmissoes = resultadoSubmissaoRepository.findByConfianca(confianca, page);
 		return new ResultadoSubmissaoDTO().converterListaResultadoSubmissaoDTO(resultadoSubmissoes);
 	}
 	
 	public ResultadoSubmissao save(ResultadoSubmissao resultadoSubmissao) throws BadResourceException, ResourceAlreadyExistsException {
-		if (resultadoSubmissao.getCriterio() != null && resultadoSubmissao.getAvaliadorSubmissao() != null) {
+		if (resultadoSubmissao.getResultado() > 0 && resultadoSubmissao.getConfianca() > 0) {
 			if(existsById(resultadoSubmissao.getId())) {
 				throw new ResourceAlreadyExistsException("ResultadoSubmissao com id: " + resultadoSubmissao.getId() + " já existe.");
 			}			
@@ -66,7 +66,7 @@ public class ResultadoSubmissaoService {
 	}
 	
 	public void update(ResultadoSubmissao resultadoSubmissao) throws BadResourceException, ResourceNotFoundException {
-		if (resultadoSubmissao.getCriterio() != null && resultadoSubmissao.getAvaliadorSubmissao() != null) {
+		if (resultadoSubmissao.getResultado() > 0 && resultadoSubmissao.getConfianca() > 0) {
 			if (!existsById(resultadoSubmissao.getId())) {
 				throw new ResourceNotFoundException("ResultadoSubmissao não encontrado com o id: " + resultadoSubmissao.getId());
 			}

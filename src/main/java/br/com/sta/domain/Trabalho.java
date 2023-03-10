@@ -37,6 +37,15 @@ public class Trabalho extends Auditoria implements Serializable {
 	@JoinColumn(name = "categoria")
 	@NotBlank
 	private Categoria categoria;
+
+	@Schema(description = "Evento do trabalho", example = "")
+	@JoinColumn(name = "evento")
+	@NotBlank
+	private Evento evento;
+
+	@Schema(description = "Resultado final do trabalho", example = "Aprovado")
+	@NotBlank
+	private String resultado;
 	
 	public Trabalho() {}
 

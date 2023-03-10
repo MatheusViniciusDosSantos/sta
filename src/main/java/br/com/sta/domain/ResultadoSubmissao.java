@@ -5,14 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -29,17 +26,13 @@ public class ResultadoSubmissao extends Auditoria implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 
-	@ManyToOne
-	@Schema(description = "Criterio", example = "")
-	@JoinColumn(name = "id_criterio")
-	private Criterio criterio;
+	private int resultado;
 
-	@ManyToOne
-	@Schema(description = "AvaliadorSubmissao", example = "")
-	@JoinColumn(name = "id_avaliador_submissao")
-	private AvaliadorSubmissao avaliadorSubmissao;
+	private int confianca;
 
-	private String resultado;
+	private String comentarioAutor;
+
+	private String comentarioOrganizador;
 	
 	public ResultadoSubmissao() {}
 

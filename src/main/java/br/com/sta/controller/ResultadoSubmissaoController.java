@@ -82,11 +82,11 @@ public class ResultadoSubmissaoController {
 			@ApiResponse(responseCode = "200", description = "Sucesso", content = @Content(schema = @Schema(implementation = ResultadoSubmissao.class))),
 			@ApiResponse(responseCode = "404", description = "ResultadoSubmissao não encontrado para este area")
 	})
-	@GetMapping(value = "/resultadoSubmissao/area/{id}")
+	@GetMapping(value = "/resultadoSubmissao/confianca/{confianca}")
 	@CrossOrigin("http://localhost:3000")
-	public ResponseEntity<Page<ResultadoSubmissaoDTO>> findResultadoSubmissaoByIdCriterio(@PathVariable long id,
+	public ResponseEntity<Page<ResultadoSubmissaoDTO>> findResultadoSubmissaoByIdCriterio(@PathVariable int confianca,
 			@Parameter(description = "Paginação", example = "{\"page\":0,\"size\":1}", allowEmptyValue = true) Pageable pageable) {
-		Page<ResultadoSubmissaoDTO> resultadoSubmissoes = resultadoSubmissaoService.findAllByIdCriterio(id, pageable);
+		Page<ResultadoSubmissaoDTO> resultadoSubmissoes = resultadoSubmissaoService.findAllByConfianca(confianca, pageable);
 		return ResponseEntity.ok(resultadoSubmissoes);
 	}
 
@@ -96,11 +96,11 @@ public class ResultadoSubmissaoController {
 			@ApiResponse(responseCode = "200", description = "Sucesso", content = @Content(schema = @Schema(implementation = ResultadoSubmissao.class))),
 			@ApiResponse(responseCode = "404", description = "ResultadoSubmissao não encontrado para este area")
 	})
-	@GetMapping(value = "/resultadoSubmissao/trabalho/{id}")
+	@GetMapping(value = "/resultadoSubmissao/resultado/{resultado}")
 	@CrossOrigin("http://localhost:3000")
-	public ResponseEntity<Page<ResultadoSubmissaoDTO>> findResultadoSubmissaoByIdAvaliadorSubmissao(@PathVariable long id,
+	public ResponseEntity<Page<ResultadoSubmissaoDTO>> findResultadoSubmissaoByResultado(@PathVariable int resultado,
 			@Parameter(description = "Paginação", example = "{\"page\":0,\"size\":1}", allowEmptyValue = true) Pageable pageable) {
-		Page<ResultadoSubmissaoDTO> resultadoSubmissoes = resultadoSubmissaoService.findAllByIdAvaliadorSubmissao(id, pageable);
+		Page<ResultadoSubmissaoDTO> resultadoSubmissoes = resultadoSubmissaoService.findAllByResultado(resultado, pageable);
 		return ResponseEntity.ok(resultadoSubmissoes);
 	}
 

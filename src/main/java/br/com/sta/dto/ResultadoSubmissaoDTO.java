@@ -9,15 +9,14 @@ import lombok.Data;
 @Data
 public class ResultadoSubmissaoDTO {
 	private long id;
-	private CriterioDTO criterioDTO;
-	private AvaliadorSubmissaoDTO avaliadorSubmissaoDTO;
-	private String resultado;
+	private int resultado;
+	private int confianca;
+	private String comentarioAutor;
+	private String comentarioOrganizador;
 	
 	public ResultadoSubmissaoDTO converter(ResultadoSubmissao resultadoSubmissao) {
 		ResultadoSubmissaoDTO resultadoSubmissaoDTO = new ResultadoSubmissaoDTO();
 		BeanUtils.copyProperties(resultadoSubmissao, resultadoSubmissaoDTO);
-		resultadoSubmissaoDTO.setCriterioDTO(criterioDTO.converter(resultadoSubmissao.getCriterio()));
-		resultadoSubmissaoDTO.setAvaliadorSubmissaoDTO(avaliadorSubmissaoDTO.converter(resultadoSubmissao.getAvaliadorSubmissao()));
 		return resultadoSubmissaoDTO;
 	}
 	

@@ -17,11 +17,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "submissao_criterio")
+@Table(name = "evento_organizador")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @EqualsAndHashCode(callSuper=true)
 @Data
-public class SubmissaoCriterio extends Auditoria implements Serializable {
+public class EventoOrganizador extends Auditoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,15 +30,15 @@ public class SubmissaoCriterio extends Auditoria implements Serializable {
 	private long id;
 
 	@ManyToOne
-	@Schema(description = "Submissao", example = "")
-	@JoinColumn(name = "id_submissao")
-	private Submissao submissao;
+	@Schema(description = "Evento", example = "")
+	@JoinColumn(name = "id_evento")
+	private Evento evento;
 
 	@ManyToOne
-	@Schema(description = "Criterio", example = "")
-	@JoinColumn(name = "id_criterio")
-	private Criterio criterio;
+	@Schema(description = "Organizador", example = "")
+	@JoinColumn(name = "id_organizador")
+	private Organizador organizador;
 	
-	public SubmissaoCriterio() {}
+	public EventoOrganizador() {}
 
 }

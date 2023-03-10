@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import br.com.sta.domain.ResultadoSubmissao;
 
 public interface ResultadoSubmissaoRepository extends JpaRepository<ResultadoSubmissao, Long> {
-	@Query(value = "select p from ResultadoSubmissao p where p.criterio.id=?1")
-	Page<ResultadoSubmissao> findByCriterio(Long id, Pageable page);
+	@Query(value = "select p from ResultadoSubmissao p where p.resultado=?1")
+	Page<ResultadoSubmissao> findByResultado(int resultado, Pageable page);
 
-	@Query(value = "select p from ResultadoSubmissao p where p.avaliadorSubmissao.id=?1")
-	Page<ResultadoSubmissao> findByAvaliadorSubmissao(Long id, Pageable page);
+	@Query(value = "select p from ResultadoSubmissao p where p.confianca=?1")
+	Page<ResultadoSubmissao> findByConfianca(int confianca, Pageable page);
 }

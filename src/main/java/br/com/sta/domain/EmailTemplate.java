@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -15,11 +16,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "submissao")
+@Table(name = "email_template")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @EqualsAndHashCode(callSuper=true)
 @Data
-public class Submissao extends Auditoria implements Serializable {
+public class EmailTemplate extends Auditoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,9 +28,13 @@ public class Submissao extends Auditoria implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-	@Schema(description = "Resultado da submissão do trabalho, definido pelo organizador", example = "Aprovado")
-	private String resultado;
+	@Schema(description = "Descrição", example = "")
+	private String titulo;
 	
-	public Submissao() {}
+	@Schema(description = "Descrição", example = "")
+	@NotBlank
+	private String mensagem;
+	
+	public EmailTemplate() {}
 
 }
