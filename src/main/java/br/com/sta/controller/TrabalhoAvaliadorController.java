@@ -103,13 +103,13 @@ public class TrabalhoAvaliadorController {
 		return ResponseEntity.ok(trabalhoAvaliadores);
 	}
 
-	@Operation(summary = "Busca ID", description = "Buscar trabalhoAvaliador por ID do avaliador", tags = {
+	@Operation(summary = "Busca ID", description = "Buscar trabalhoAvaliador por ID do resultadoSubmissao", tags = {
 		"trabalhoAvaliador" })
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Sucesso", content = @Content(schema = @Schema(implementation = TrabalhoAvaliador.class))),
 			@ApiResponse(responseCode = "404", description = "TrabalhoAvaliador não encontrado para este resultadoSubmissao")
 	})
-	@GetMapping(value = "/trabalhoAvaliador/avaliador/{id}")
+	@GetMapping(value = "/trabalhoAvaliador/resultadoSubmisao/{id}")
 	@CrossOrigin("http://localhost:3000")
 	public ResponseEntity<Page<TrabalhoAvaliadorDTO>> findTrabalhoAvaliadorByIdResultadoSubmissao(@PathVariable long id,
 			@Parameter(description = "Paginação", example = "{\"page\":0,\"size\":1}", allowEmptyValue = true) Pageable pageable) {

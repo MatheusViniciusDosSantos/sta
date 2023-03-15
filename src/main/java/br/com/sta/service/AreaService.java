@@ -28,7 +28,7 @@ public class AreaService {
 		Area area = areaRepository.findById(id).orElse(null);
 		
 		if(area == null) {
-			throw new ResourceNotFoundException("Area não encontrado com o id: " + id);
+			throw new ResourceNotFoundException("Area não encontrada com o id: " + id);
 		} else {
 			return area;
 		}
