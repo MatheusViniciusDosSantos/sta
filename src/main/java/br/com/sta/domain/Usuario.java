@@ -2,6 +2,8 @@ package br.com.sta.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import br.com.sta.enums.UsuarioTipo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -50,6 +53,9 @@ public class Usuario extends Auditoria implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Schema(description = "Data de envio do código de recuperação")
 	private Date dataEnvioCodigo;
+
+	@Schema(description = "Tipo de usuário do sistema")
+	private List<UsuarioTipo> usuarioTipos;
 	
 	public Usuario() {}
 
