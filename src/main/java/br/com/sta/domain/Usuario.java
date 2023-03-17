@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,7 +18,6 @@ import javax.validation.constraints.NotBlank;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import br.com.sta.enums.UsuarioTipo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -53,9 +54,6 @@ public class Usuario extends Auditoria implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@Schema(description = "Data de envio do código de recuperação")
 	private Date dataEnvioCodigo;
-
-	@Schema(description = "Tipo de usuário do sistema")
-	private List<UsuarioTipo> usuarioTipos;
 	
 	public Usuario() {}
 
